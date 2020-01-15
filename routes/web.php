@@ -11,6 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::view('/', 'welcome')->name('index');
+
+Route::prefix('auth')->namespace('Auth')->name('auth')->group(function () {
+    Route::get('login', 'PasswordlessAuth@showLoginPage')->name('.login');
+    Route::get('pending/{email}', 'PasswordlessAuth@showEmailSent')->name('.process.email');
+    Route::get('login/process/{id}', 'PasswordlessAuth@processLogin')->name('.process.login');
+    Route::get('register/process/{email}', 'PasswordlessAuth@processRegistration')->name('.process.register');
+
+    Route::post('login', 'PasswordlessAuth@sendAuthToken');
+    Route::post('logout', 'PasswordlessAuth@logout')->name('.logout');
 });
+
+Route::get('/home', 'HomeController@index')->name('home');
