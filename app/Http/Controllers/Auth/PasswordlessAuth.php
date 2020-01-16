@@ -20,6 +20,7 @@ class PasswordlessAuth extends Controller
     {
         $this->redirectTo = route('home');
 
+        $this->middleware('guest')->except('logout');
         $this->middleware('signed')->except(['sendAuthToken', 'showLoginPage', 'showEmailSent', 'logout']);
     }
 
@@ -35,9 +36,9 @@ class PasswordlessAuth extends Controller
         return view('auth.login');
     }
 
-    public function showEmailSent()
+    public function showEmailSent($email)
     {
-        return view('auth.email-sent');
+        return view('auth.email-sent')->with('email', decrypt($email));
     }
 
     public function sendAuthToken(Request $request)

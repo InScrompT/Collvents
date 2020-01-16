@@ -31,6 +31,17 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $profile_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Event[] $events
+ * @property-read int|null $events_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Going[] $going
+ * @property-read int|null $going_count
+ * @property-read \App\Profile $profile
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereProfileId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Ticket[] $tickets
+ * @property-read int|null $tickets_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Transaction[] $transactions
+ * @property-read int|null $transactions_count
  */
 class User extends Authenticatable
 {
@@ -42,7 +53,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name', 'email', 'email_verified_at'
     ];
 
     /**
@@ -62,4 +73,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function going()
+    {
+        return $this->hasMany(Going::class);
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
