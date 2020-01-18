@@ -42,6 +42,9 @@ use Illuminate\Notifications\Notifiable;
  * @property-read int|null $tickets_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Transaction[] $transactions
  * @property-read int|null $transactions_count
+ * @property int|null $college_id
+ * @property-read \App\College|null $college
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCollegeId($value)
  */
 class User extends Authenticatable
 {
@@ -62,7 +65,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token',
     ];
 
     /**
@@ -92,5 +95,10 @@ class User extends Authenticatable
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function college()
+    {
+        return $this->belongsTo(College::class);
     }
 }

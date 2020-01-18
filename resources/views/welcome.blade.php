@@ -1,94 +1,380 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!doctype html>
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{{ env('APP_NAME') }} | A single stop to get all college events, fests and competitions</title>
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <div class="top-right links">
-                @auth
-                    <a href="{{ route('home') }}">Home</a>
-                @else
-                    <a href="{{ route('auth.login') }}">{{ __('Login') }} / {{ __('Register') }}</a>
-                @endauth
-            </div>
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a href="{{ route('index') }}" class="navbar-item">
+                        <span class="navbar-item" style="font-size: 1.5em">Collvents</span>
+                    </a>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    {{ getenv('APP_NAME') }}
+                    {{--Hamburger menu, must have three spans to show three dashes--}}
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="navbar-menu">
+                    <div class="navbar-end">
+                        <a href="{{ route('auth.login') }}" class="navbar-item">Account</a>
+                        <div class="navbar-item">
+                            <a href="#" class="button is-primary">Submit Event</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </nav>
+        <section class="hero is-info is-medium">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <div class="columns is-centered">
+                        <div class="column is-8">
+                            <h1 class="title">
+                                College events, workshops, festivals and what not?
+                            </h1>
+                            <form action="">
+                                <div class="control">
+                                    <input type="text" class="input is-medium" placeholder="Search for events in cities or college near you.">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <div class="has-margin-2">
+                    <span class="is-size-4 has-text-grey-light">Events near you...</span>
+                </div>
+                <div class="columns">
+                    <div class="column is-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-5by3">
+                                    <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
+                                <p class="has-text-grey-dark is-uppercase event-title">mechamorphis 2k20</p>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">
+                                    kcg college of technology
+                                </a>
+                                <br/>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Chennai</a>,
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Tamilnadu</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                    <a href="" class="button is-primary is-fullwidth">Attend</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-5by3">
+                                    <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
+                                <p class="has-text-grey-dark is-uppercase event-title">mechamorphis 2k20</p>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">
+                                    kcg college of technology
+                                </a>
+                                <br/>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Chennai</a>,
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Tamilnadu</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                    <a href="" class="button is-primary is-fullwidth">Attend</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-5by3">
+                                    <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
+                                <p class="has-text-grey-dark is-uppercase event-title">mechamorphis 2k20</p>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">
+                                    kcg college of technology
+                                </a>
+                                <br/>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Chennai</a>,
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Tamilnadu</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                    <a href="" class="button is-primary is-fullwidth">Attend</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-5by3">
+                                    <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
+                                <p class="has-text-grey-dark is-uppercase event-title">mechamorphis 2k20</p>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">
+                                    kcg college of technology
+                                </a>
+                                <br/>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Chennai</a>,
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Tamilnadu</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                    <a href="" class="button is-primary is-fullwidth">Attend</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="is-pulled-right">
+                    <a href="#" class="is-info">...load more events</a>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <div class="has-margin-2">
+                    <span class="is-size-4 has-text-grey-light">Events in your state...</span>
+                </div>
+                <div class="columns">
+                    <div class="column is-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-5by3">
+                                    <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
+                                <p class="has-text-grey-dark is-uppercase event-title">mechamorphis 2k20</p>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">
+                                    kcg college of technology
+                                </a>
+                                <br/>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Chennai</a>,
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Tamilnadu</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                    <a href="" class="button is-primary is-fullwidth">Attend</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-5by3">
+                                    <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
+                                <p class="has-text-grey-dark is-uppercase event-title">mechamorphis 2k20</p>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">
+                                    kcg college of technology
+                                </a>
+                                <br/>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Chennai</a>,
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Tamilnadu</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                    <a href="" class="button is-primary is-fullwidth">Attend</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-5by3">
+                                    <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
+                                <p class="has-text-grey-dark is-uppercase event-title">mechamorphis 2k20</p>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">
+                                    kcg college of technology
+                                </a>
+                                <br/>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Chennai</a>,
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Tamilnadu</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                    <a href="" class="button is-primary is-fullwidth">Attend</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-5by3">
+                                    <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
+                                <p class="has-text-grey-dark is-uppercase event-title">mechamorphis 2k20</p>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">
+                                    kcg college of technology
+                                </a>
+                                <br/>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Chennai</a>,
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Tamilnadu</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                    <a href="" class="button is-primary is-fullwidth">Attend</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="is-pulled-right">
+                    <a href="#" class="is-info">...load more events</a>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <div class="has-margin-2">
+                    <span class="is-size-4 has-text-grey-light">Events all over India...</span>
+                </div>
+                <div class="columns">
+                    <div class="column is-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-5by3">
+                                    <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
+                                <p class="has-text-grey-dark is-uppercase event-title">mechamorphis 2k20</p>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">
+                                    kcg college of technology
+                                </a>
+                                <br/>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Chennai</a>,
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Tamilnadu</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                    <a href="" class="button is-primary is-fullwidth">Attend</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-5by3">
+                                    <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
+                                <p class="has-text-grey-dark is-uppercase event-title">mechamorphis 2k20</p>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">
+                                    kcg college of technology
+                                </a>
+                                <br/>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Chennai</a>,
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Tamilnadu</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                    <a href="" class="button is-primary is-fullwidth">Attend</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-5by3">
+                                    <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
+                                <p class="has-text-grey-dark is-uppercase event-title">mechamorphis 2k20</p>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">
+                                    kcg college of technology
+                                </a>
+                                <br/>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Chennai</a>,
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Tamilnadu</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                    <a href="" class="button is-primary is-fullwidth">Attend</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-5by3">
+                                    <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
+                                <p class="has-text-grey-dark is-uppercase event-title">mechamorphis 2k20</p>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">
+                                    kcg college of technology
+                                </a>
+                                <br/>
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Chennai</a>,
+                                <a href="#" class="is-size-7 has-text-grey is-uppercase">Tamilnadu</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                    <a href="" class="button is-primary is-fullwidth">Attend</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="is-pulled-right">
+                    <a href="#" class="is-info">...load more events</a>
+                </div>
+            </div>
+        </section>
+        <script src="{{ asset('js/app.js') }}" defer></script>
     </body>
 </html>

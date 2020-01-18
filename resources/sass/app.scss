@@ -1,8 +1,28 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
 
 // Variables
 @import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// Bulma
+@import '~bulma/bulma';
+
+.event-title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.has-margin-1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.has-margin-2 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.has-margin-3 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}

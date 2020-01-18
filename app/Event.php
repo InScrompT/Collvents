@@ -32,6 +32,12 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Ticket[] $tickets
  * @property-read int|null $tickets_count
+ * @property string $description
+ * @property int $pincode
+ * @property int $college_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereCollegeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Event wherePincode($value)
  */
 class Event extends Model
 {
