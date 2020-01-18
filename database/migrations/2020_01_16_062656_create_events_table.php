@@ -15,11 +15,18 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
+
             $table->string('name');
+            $table->string('description', 1000);
+
+            $table->unsignedBigInteger('pincode');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('college_id');
+
             $table->dateTime('start_time');
             $table->dateTime('end_time')->nullable();
             $table->boolean('is_one_day');
+
             $table->timestamps();
         });
     }
