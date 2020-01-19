@@ -11,7 +11,8 @@
 |
 */
 
-Route::view('/', 'welcome')->name('index');
+Route::get('/', 'EventController@all')->name('index');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('auth')->namespace('Auth')->name('auth')->group(function () {
     Route::get('login', 'PasswordlessAuth@showLoginPage')->name('.login');
@@ -22,5 +23,3 @@ Route::prefix('auth')->namespace('Auth')->name('auth')->group(function () {
     Route::post('login', 'PasswordlessAuth@sendAuthToken');
     Route::post('logout', 'PasswordlessAuth@logout')->name('.logout');
 });
-
-Route::get('/home', 'HomeController@index')->name('home');

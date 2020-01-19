@@ -12455,3 +12455,8 @@ label.panel-block:hover {
   padding-bottom: 10px;
 }
 
+.has-margin-2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
