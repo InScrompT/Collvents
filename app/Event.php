@@ -38,6 +38,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereCollegeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Event wherePincode($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
+ * @property-read int|null $roles_count
  */
 class Event extends Model
 {

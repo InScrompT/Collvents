@@ -45,6 +45,8 @@ use Illuminate\Notifications\Notifiable;
  * @property int|null $college_id
  * @property-read \App\College|null $college
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCollegeId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
+ * @property-read int|null $roles_count
  */
 class User extends Authenticatable
 {
