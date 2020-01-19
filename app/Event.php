@@ -41,6 +41,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Event extends Model
 {
+    protected $fillable = [
+        'name', 'description', 'pincode', 'user_id',
+        'college_id', 'start_time', 'end_time', 'is_one_day'
+    ];
+
     public function organizer()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -54,5 +59,10 @@ class Event extends Model
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
     }
 }

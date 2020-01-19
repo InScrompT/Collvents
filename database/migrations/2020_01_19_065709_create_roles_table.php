@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGoingsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateGoingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('goings', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('event_id');
+
+            // 0 for organizer
+            // 1 for hunter
+            $table->unsignedInteger('role');
 
             $table->timestamps();
         });
@@ -30,6 +34,6 @@ class CreateGoingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('goings');
+        Schema::dropIfExists('roles');
     }
 }
