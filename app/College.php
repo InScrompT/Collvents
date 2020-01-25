@@ -35,11 +35,6 @@ class College extends Model
         'type_id', 'name', 'city', 'state'
     ];
 
-    public function type()
-    {
-        return $this->belongsTo(Type::class);
-    }
-
     public function events()
     {
         return $this->hasMany(Event::class);
