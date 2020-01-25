@@ -26,6 +26,8 @@ class CreateTicketsTable extends Migration
 
             $table->boolean('free')->default(true);
             $table->boolean('multiple_ticket')->default(false);
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

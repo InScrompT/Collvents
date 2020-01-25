@@ -19,6 +19,7 @@ class CreateGoingsTable extends Migration
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('user_id');
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

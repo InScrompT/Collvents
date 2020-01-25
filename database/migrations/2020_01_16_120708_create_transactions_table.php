@@ -15,9 +15,13 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
+
             $table->bigInteger('ticket_id');
             $table->bigInteger('user_id');
+
             $table->integer('quantity')->default(1);
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ class CreateCollegesTable extends Migration
             $table->string('city');
             $table->string('state');
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -27,6 +27,7 @@ class CreateEventsTable extends Migration
             $table->dateTime('end_time')->nullable();
             $table->boolean('is_one_day');
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }
