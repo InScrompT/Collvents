@@ -17,57 +17,55 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div class="navbar-brand">
+                    <a href="{{ route('index') }}" class="navbar-item">
+                        <span class="navbar-item" style="font-size: 1.5em">Collvents</span>
+                    </a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                    {{--Hamburger menu, must have three spans to show three dashes--}}
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                <div class="navbar-menu">
+                    <div class="navbar-end">
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('auth.login') }}">{{ __('Login') }} / {{ __('Register') }}</a>
-                            </li>
+                            <a href="{{ route('auth.login') }}" class="navbar-item">Account</a>
+                            <div class="navbar-item">
+                                <a href="#" class="button is-primary">Submit Event</a>
+                            </div>
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('auth.logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <span href="#" class="navbar-link">{{ Auth::user()->name ?? Auth::user()->email }}</span>
+                                <div class="navbar-dropdown">
+                                    <a href="{{ route('home') }}" class="navbar-item">Dashboard</a>
+                                    <hr class="navbar-divider">
+                                    <a href="{{ route('auth.logout') }}" class="navbar-item" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        Logout
                                     </a>
-
-                                    <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
                                 </div>
-                            </li>
+                            </div>
+                            <div class="navbar-item">
+                                <a href="#" class="button is-primary">Submit Event</a>
+                            </div>
+                            <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         @endguest
-                    </ul>
+                    </div>
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>

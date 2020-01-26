@@ -2,23 +2,24 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <section class="section">
+        <div class="has-margin-2">
             <div class="card">
-                <div class="card-header">Magic link has been sent</div>
+                <div class="card-content">
+                    <p class="subtitle">Magic link has been sent</p>
+                    <p>Before proceeding, please check your email for a magic link. It will help you to login into your account.</p>
+                    <p>Click the button below if you still did not get the magic link. Do check your spam folder too</p>
 
-                <div class="card-body">
-                    Before proceeding, please check your email for a magic link. It will help you to login into your account.
                     <br>
-                    {{ __('If you did not receive the email') }},
+
                     <form class="d-inline" method="POST" action="{{ route('auth.login') }}">
                         @csrf
                         <input type="email" name="email" hidden value="{{ $email }}">
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                        <button type="submit" class="button is-primary">Click here to request another</button>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
 @endsection
