@@ -21,4 +21,9 @@ class EventController extends Controller
             'india' => $aoiEvents
         ]);
     }
+
+    public function showCreate()
+    {
+        return view('events.create');
+    }
 }

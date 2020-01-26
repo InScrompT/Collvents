@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="navbar-item">
-                                <a href="#" class="button is-primary">Submit Event</a>
+                                <a href="{{ route('event.create') }}" class="button is-primary">Submit Event</a>
                             </div>
                             <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
                                 @csrf
@@ -69,5 +69,6 @@
             @yield('content')
         </main>
     </div>
+    @yield('scripts')
 </body>
 </html>

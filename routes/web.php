@@ -23,3 +23,9 @@ Route::prefix('auth')->namespace('Auth')->name('auth')->group(function () {
     Route::post('login', 'PasswordlessAuth@sendAuthToken');
     Route::post('logout', 'PasswordlessAuth@logout')->name('.logout');
 });
+
+Route::prefix('event')->name('event.')->group(function () {
+    Route::get('create', 'EventController@showCreate')->name('create');
+
+    Route::post('create', 'EventController@processCreate');
+});
