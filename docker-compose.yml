@@ -4,5 +4,34 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./docker/app.dockerfile
-    image:
+      dockerfile: app.dockerfile
+    image: docker.pkg.github.com/inscrompt/collvents/app:dev
+    ports:
+      - "1111:80"
+      - "2222:2015"
+    depends_on:
+      - php
+      - mysql
+      - redis
+    restart: always
+
+  php:
+    image: php:fpm-alpine
+    restart: always
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: passwordROFL
+    volumes:
+      - "dbdata:/var/lib/mysql"
+    restart: always
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    restart: always
+
+volumes:
+  dbdata:

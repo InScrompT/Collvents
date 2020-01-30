@@ -1,0 +1,3 @@
+0.0.0.0
+root /srv/public
+fastcgi / php:9000 php
