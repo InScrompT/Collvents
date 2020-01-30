@@ -26,4 +26,9 @@ class EventController extends Controller
     {
         return view('events.create');
     }
+
+    public function processCreate()
+    {
+        //
+    }
 }

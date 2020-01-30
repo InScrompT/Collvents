@@ -7,7 +7,7 @@
                 <div class="columns is-centered">
                     <div class="column is-8">
                         <h1 class="title">
-                            Display the event in InCollvents
+                            Display the event in {{ env('APP_NAME') }}
                         </h1>
                     </div>
                 </div>

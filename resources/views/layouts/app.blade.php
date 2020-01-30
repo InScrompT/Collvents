@@ -25,7 +25,7 @@
             <div class="container">
                 <div class="navbar-brand">
                     <a href="{{ route('index') }}" class="navbar-item">
-                        <span class="navbar-item" style="font-size: 1.5em">Collvents</span>
+                        <span class="navbar-item" style="font-size: 1.5em">{{ env('APP_NAME') }}</span>
                     </a>
 
                     {{--Hamburger menu, must have three spans to show three dashes--}}

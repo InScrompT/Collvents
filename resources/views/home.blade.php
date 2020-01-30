@@ -7,7 +7,7 @@
                 <div class="columns is-centered">
                     <div class="column is-8">
                         <h1 class="title">
-                            Welcome to InVents, {{ Auth::user()->name ?? Auth::user()->email  }}!
+                            Welcome to {{ env('APP_NAME') }}, {{ Auth::user()->name ?? Auth::user()->email  }}!
                         </h1>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
     <section class="section">
         <div class="container">
             <div class="has-margin-2">
-                <div class="tabs is-centered">
+                <div class="tabs">
                     <ul>
                         <li class="is-active"><a>Your Events</a></li>
                         <li><a>Going</a></li>
