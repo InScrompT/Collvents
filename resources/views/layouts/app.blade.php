@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} | It's not happening if it's not InPening</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -44,7 +44,7 @@
                             </div>
                         @else
                             <div class="navbar-item has-dropdown is-hoverable">
-                                <span href="#" class="navbar-link">{{ Auth::user()->name ?? Auth::user()->email }}</span>
+                                <span href="#" class="navbar-link">{{ Auth::user()->profile->name ?? Auth::user()->email }}</span>
                                 <div class="navbar-dropdown">
                                     <a href="{{ route('home') }}" class="navbar-item">Dashboard</a>
                                     <hr class="navbar-divider">

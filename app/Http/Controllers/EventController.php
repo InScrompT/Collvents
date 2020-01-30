@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('all');
+    }
+
     public function all()
     {
         $cityEvents = College::whereCity('chennai')->limit(4)->get();
@@ -29,6 +34,6 @@ class EventController extends Controller
 
     public function processCreate()
     {
-        //
+        return request()->all();
     }
 }
