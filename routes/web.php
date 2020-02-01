@@ -32,7 +32,7 @@ Route::prefix('home')->middleware('auth')->group(function () {
     Route::get('going', 'HomeController@going')->name('home.going');
     Route::get('transaction', 'HomeController@transaction')->name('home.transaction');
 });
-Route::prefix('college')->middleware('auth')->prefix('college.')->group(function () {
+Route::prefix('college')->middleware('auth')->name('college.')->group(function () {
     Route::get('create', 'CollegeController@create')->name('create');
 
     Route::post('create', 'CollegeController@processCreate');

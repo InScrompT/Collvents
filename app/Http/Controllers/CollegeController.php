@@ -12,8 +12,7 @@ class CollegeController extends Controller
      */
     public function create()
     {
-        //TODO: make a view
-        return view('');
+        return view('college.create');
     }
 
     public function processCreate()

@@ -21,10 +21,10 @@
                     <p class="title is-4 has-text-centered">Want to jump start?</p>
                     <div class="columns has-margin-2">
                         <div class="column is-6 center">
-                            <button class="button is-primary is-fullwidth">Create An Event</button>
+                            <a href="{{ route('event.create') }}" class="button is-primary is-fullwidth">Create An Event</a>
                         </div>
                         <div class="column is-6">
-                            <button class="button is-primary is-fullwidth">Join An Event</button>
+                            <a href="{{ route('index') }}" class="button is-primary is-fullwidth">Join An Event</a>
                         </div>
                     </div>
                 </div>
