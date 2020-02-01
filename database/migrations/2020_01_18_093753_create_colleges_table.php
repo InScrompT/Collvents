@@ -15,7 +15,6 @@ class CreateCollegesTable extends Migration
     {
         Schema::create('colleges', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('type_id');
 
             $table->string('name');
             $table->string('city');

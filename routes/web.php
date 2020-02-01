@@ -12,8 +12,12 @@
 */
 
 Route::get('/', 'EventController@all')->name('index');
-Route::get('/home', 'HomeController@index')->name('home');
 
+Route::prefix('event')->name('event.')->group(function () {
+    Route::get('create', 'EventController@showCreate')->name('create');
+
+    Route::post('create', 'EventController@processCreate');
+});
 Route::prefix('auth')->namespace('Auth')->name('auth')->group(function () {
     Route::get('login', 'PasswordlessAuth@showLoginPage')->name('.login');
     Route::get('pending/{email}', 'PasswordlessAuth@showEmailSent')->name('.process.email');
@@ -23,9 +27,13 @@ Route::prefix('auth')->namespace('Auth')->name('auth')->group(function () {
     Route::post('login', 'PasswordlessAuth@sendAuthToken');
     Route::post('logout', 'PasswordlessAuth@logout')->name('.logout');
 });
+Route::prefix('home')->middleware('auth')->group(function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('going', 'HomeController@going')->name('home.going');
+    Route::get('transaction', 'HomeController@transaction')->name('home.transaction');
+});
+Route::prefix('college')->middleware('auth')->prefix('college.')->group(function () {
+    Route::get('create', 'CollegeController@create')->name('create');
 
-Route::prefix('event')->name('event.')->group(function () {
-    Route::get('create', 'EventController@showCreate')->name('create');
-
-    Route::post('create', 'EventController@processCreate');
+    Route::post('create', 'CollegeController@processCreate');
 });

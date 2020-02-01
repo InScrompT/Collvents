@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Going;
+use App\Transaction;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +27,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $eventsOwned = Event::whereUserId(auth()->id());
+
+        return view('home.home')->with([
+            'owned' => $eventsOwned,
+        ]);
+    }
+
+    public function going()
+    {
+        $eventsGoing = Going::whereUserId(auth()->id());
+
+        return view('home.going')->with([
+            'going' => $eventsGoing,
+        ]);
+    }
+
+    public function transaction()
+    {
+        return view('home.transaction');
     }
 }
