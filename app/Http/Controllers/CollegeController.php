@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 
+use App\College;
+
 class CollegeController extends Controller
 {
     /**
@@ -17,6 +19,16 @@ class CollegeController extends Controller
 
     public function processCreate()
     {
-        //
+        request()->validate([
+            'name' => 'required|max:150|min:15',
+            'state' => 'required',
+            'city' => 'required'
+        ]);
+
+        College::create(request()->all());
+
+        return redirect()
+            ->to(route('home'))
+            ->with('success', 'The college has been added to ' . env('APP_NAME') . ' successfully');
     }
 }

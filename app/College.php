@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\Model;
 class College extends Model
 {
     protected $fillable = [
-        'type_id', 'name', 'city', 'state'
+        'name', 'city', 'state'
     ];
 
     public function events()

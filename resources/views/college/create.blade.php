@@ -18,6 +18,15 @@
         <div class="columns is-centered">
             <div class="column is-8">
                 <section class="section">
+                    @if ($errors->any())
+                        <div class="notification is-danger has-margin-2">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{ route('college.create') }}" method="post">
 
                         {{ csrf_field() }}
@@ -36,7 +45,7 @@
                                         <label for="state">State</label>
                                         <div class="select is-fullwidth">
                                             <select name="state" id="state">
-                                                <option value="0" selected disabled>Select State</option>
+                                                <option value="" selected disabled>Select State</option>
                                                 <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                                                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -85,7 +94,7 @@
                                         <label for="city">City/Town Name</label>
                                         <div class="select is-fullwidth">
                                             <select name="city" id="city">
-                                                <option value="0" disabled selected>Select City</option>
+                                                <option value="" disabled selected>Select City</option>
                                                 <option value="Mumbai">Mumbai</option>
                                                 <option value="Delhi">Delhi</option>
                                                 <option value="Bangalore">Bangalore</option>
