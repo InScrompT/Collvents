@@ -17,15 +17,18 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
 
             $table->string('name');
-            $table->string('description', 1000);
+            $table->string('description', 2000);
 
-            $table->unsignedBigInteger('pincode');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('college_id');
 
-            $table->dateTime('start_time');
-            $table->dateTime('end_time')->nullable();
-            $table->boolean('is_one_day');
+            $table->time('start_time');
+            $table->time('end_time');
+
+            $table->date('start_date');
+            $table->date('end_date');
+
+            $table->boolean('draft');
 
             $table->softDeletes();
             $table->timestamps();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\College;
+use App\Event;
 
 class EventController extends Controller
 {
@@ -33,6 +34,30 @@ class EventController extends Controller
 
     public function processCreate()
     {
-        return request()->all();
+        request()->validate([
+            'name'          => 'required',
+            'college'       => 'required',
+            'description'   => 'required',
+            'start_time'    => 'required',
+            'start_date'    => 'required',
+            'end_time'      => 'required',
+            'end_date'      => 'required',
+        ]);
+
+        $event = Event::create([
+            'name'          => request()->get('name'),
+            'description'   => request()->get('description'),
+            'user_id'       => auth()->id(),
+            'college_id'    => 0, // TODO: make it working, ASAP
+            'start_time'    => request()->get('start_time'),
+            'start_date'    => request()->get('start_date'),
+            'end_time'      => request()->get('end_time'),
+            'end_date'      => request()->get('end_date'),
+            'draft'         => true
+        ]);
+
+        return redirect()->to(
+            route('ticket.create', $event->id)
+        );
     }
 }

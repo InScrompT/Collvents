@@ -37,3 +37,7 @@ Route::prefix('college')->middleware('auth')->name('college.')->group(function (
 
     Route::post('create', 'CollegeController@processCreate');
 });
+Route::prefix('ticket')->middleware('auth')->name('ticket')->group(function () {
+    Route::get('create/{event}', 'TicketController@showCreate')
+        ->name('.create');
+});

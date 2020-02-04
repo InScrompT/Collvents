@@ -44,8 +44,8 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     protected $fillable = [
-        'name', 'description', 'pincode', 'user_id',
-        'college_id', 'start_time', 'end_time', 'is_one_day'
+        'name', 'description', 'user_id', 'start_date', 'end_date',
+        'college_id', 'start_time', 'end_time', 'draft'
     ];
 
     public function organizer()

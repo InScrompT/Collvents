@@ -21,7 +21,7 @@
                     <div class="notification is-primary">
                         You can add tickets, set rates and limit the quantity of tickets at the next page
                     </div>
-                    <form action="{{ route('event.create') }}" method="post">
+                    <form action="{{ route('event.create') }}" method="post" id="eventForm">
 
                         {{ csrf_field() }}
 
@@ -40,25 +40,6 @@
                             <div class="control">
                                 <label for="college">College Name</label>
                                 <input type="text" name="college" class="input" id="college" required>
-                            </div>
-                        </div>
-
-                        <div class="columns">
-                            <div class="column is-6">
-                                <div class="field">
-                                    <div class="control">
-                                        <label for="city">City / Town</label>
-                                        <input type="text" name="city" class="input" id="city" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="column is-6">
-                                <div class="field">
-                                    <div class="control">
-                                        <label for="state">State</label>
-                                        <input type="text" name="state" class="input" id="state" required>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -113,7 +94,7 @@
 
                         <div class="field">
                             <div class="control">
-                                <input type="submit" value="Submit" class="button is-primary is-fullwidth">
+                                <input type="submit" value="Submit" class="button is-primary is-fullwidth" onclick="document.getElementById('eventForm').submit()">
                             </div>
                         </div>
                     </form>
