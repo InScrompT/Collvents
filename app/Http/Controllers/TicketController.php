@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Ticket;
-use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
@@ -14,7 +13,7 @@ class TicketController extends Controller
             abort(403);
         }
 
-        return ['awesome'];
+        return view('ticket.create');
     }
 
     public function processCreate()
