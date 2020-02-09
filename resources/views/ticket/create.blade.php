@@ -23,12 +23,12 @@
                             <span class="subtitle is-4 has-text-grey">Total Tickets: 0</span>
                         </div>
                         <div class="column is-4">
-                            <button class="button is-primary is-fullwidth is-uppercase">Add ticket</button>
+                            <button class="button is-primary is-fullwidth is-uppercase" id="add-ticket">Add ticket</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <form action="">
+            <form action="" id="ticket-form">
                 <div class="has-margin-2">
                     <div class="notification">
                         <div class="field">
@@ -42,4 +42,31 @@
             </form>
         </section>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        var ticketNumber = 1;
+
+        document.getElementById('add-ticket').addEventListener('click', function (event) {
+            event.preventDefault();
+            addTicketField();
+            ticketNumber++;
+        });
+
+        function addTicketField() {
+            var ticket = document.createElement('div');
+            ticket.classList = "has-margin-2";
+            ticket.innerHTML = '<div class="notification">' +
+                `<span class="is-size-4 has-text-grey-light">Ticket ${ticketNumber}</span>` +
+                '<div class="field">' +
+                    '<div class="control">' +
+                        '<label for="name" class="is-capitalized">ticket name</label>' +
+                        '<input type="text" class="input" id="name" placeholder="Ticket Name">' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+            document.getElementById('ticket-form').appendChild(ticket);
+        }
+    </script>
 @endsection
