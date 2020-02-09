@@ -13,7 +13,9 @@ class TicketController extends Controller
             abort(403);
         }
 
-        return view('ticket.create');
+        return view('ticket.create')->with([
+            'event_name' => $event->name
+        ]);
     }
 
     public function processCreate()
