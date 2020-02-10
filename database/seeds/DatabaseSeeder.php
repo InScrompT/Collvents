@@ -11,8 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 100)->create()->each(function (\App\User $user) {
-            $user->profile()->save(factory(App\Profile::class)->make());
-        });
+        $this->call([
+            CollegeSeeder::class
+        ]);
     }
 }
