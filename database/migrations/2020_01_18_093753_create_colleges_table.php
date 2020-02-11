@@ -17,8 +17,8 @@ class CreateCollegesTable extends Migration
             $table->bigIncrements('id');
 
             $table->string('name');
-            $table->string('city');
-            $table->string('state');
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

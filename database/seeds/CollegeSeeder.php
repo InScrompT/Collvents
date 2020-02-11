@@ -11,14 +11,14 @@ class CollegeSeeder extends Seeder
      */
     public function run()
     {
-        $collegeRawData = file_get_contents(__DIR__ . '/../colleges.json');
-        $collegeData = json_decode($collegeRawData);
+        $collegeRawData = file_get_contents(app()->databasePath('colleges.json'));
+        $collegeData = json_decode($collegeRawData, true);
 
-        foreach ($collegeData->colleges as $college) {
-            DB::table('colleges')->insert([
+        foreach ($collegeData['colleges'] as $college) {
+            \App\College::create([
                 'name' => $college['name'],
-                'city' => $college['city'],
-                'state' => $college['state'],
+                'city' => $college['city'] ?? null,
+                'state' => $college['state'] ?? null,
             ]);
         }
     }
