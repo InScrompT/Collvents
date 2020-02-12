@@ -21,11 +21,9 @@ class CreateTicketsTable extends Migration
             $table->string('description', 1000);
 
             $table->integer('quantity')->default(0); // Unlimited
-            $table->integer('available')->nullable();
+            $table->integer('maximum')->default(1);
+            $table->integer('minimum')->default(0); // Unlimited
             $table->float('price')->default(0.0);
-
-            $table->boolean('free')->default(true);
-            $table->boolean('multiple_ticket')->default(false);
 
             $table->softDeletes();
             $table->timestamps();

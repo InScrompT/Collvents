@@ -30,7 +30,7 @@ class HomeController extends Controller
         $eventsOwned = Event::whereUserId(auth()->id());
 
         return view('home.home')->with([
-            'owned' => $eventsOwned,
+            'events' => $eventsOwned,
         ]);
     }
 
