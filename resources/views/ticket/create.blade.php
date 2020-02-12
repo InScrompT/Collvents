@@ -19,20 +19,25 @@
             <div class="has-margin-2">
                 <div class="notification has-text-centered-mobile">
                     <div class="columns is-vcentered">
-                        <div class="column is-4">
+                        <div class="column is-8">
                             <span class="subtitle is-4 has-text-grey">Total Tickets: <span id="ticket-count">0</span></span>
                         </div>
                         <div class="column is-4">
                             <button class="button is-primary is-fullwidth is-uppercase" id="add-ticket">Add ticket</button>
-                        </div>
-                        <div class="column is-4">
-                            <button class="button is-primary is-outlined is-fullwidth is-uppercase" onclick="saveForm(this)">Save tickets</button>
                         </div>
                     </div>
                 </div>
             </div>
             <form action="{{ route('ticket.create', [$event_id]) }}" id="ticket-form" method="post">
                 @csrf
+
+                <span id="ticket-insert"></span>
+
+                <div class="field" style="display: none" id="ticket-submit">
+                    <div class="control">
+                        <input type="submit" value="Save Tickets" class="input button is-primary is-fullwidth is-uppercase">
+                    </div>
+                </div>
             </form>
         </section>
     </div>
@@ -48,9 +53,13 @@
 
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('add-ticket').addEventListener('click', function (event) {
+                ticketNumber++;
                 event.preventDefault();
 
-                ticketNumber++;
+                if (ticketNumber > 0) {
+                    document.getElementById('ticket-submit').removeAttribute('style');
+                }
+
                 document.getElementById('ticket-count').innerText = `${ticketNumber}`;
 
                 var ticket = document.createElement('div');
@@ -106,7 +115,7 @@
                     '</div>' +
                 '</div>';
 
-                document.getElementById('ticket-form').appendChild(ticket);
+                document.getElementById('ticket-insert').appendChild(ticket);
             });
         });
     </script>
