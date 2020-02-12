@@ -19,7 +19,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
-<body>
+<body id="app-body">
     <div id="app">
         <nav class="navbar">
             <div class="container">

@@ -14,7 +14,8 @@ class TicketController extends Controller
         }
 
         return view('ticket.create')->with([
-            'event_name' => $event->name
+            'event_id' => $event->id,
+            'event_name' => $event->name,
         ]);
     }
 
