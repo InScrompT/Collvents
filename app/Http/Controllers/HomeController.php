@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $eventsOwned = Event::whereUserId(auth()->id());
+        $eventsOwned = Event::whereUserId(auth()->id())->get();
 
         return view('home.home')->with([
             'events' => $eventsOwned,
@@ -36,7 +36,7 @@ class HomeController extends Controller
 
     public function going()
     {
-        $eventsGoing = Going::whereUserId(auth()->id());
+        $eventsGoing = Going::whereUserId(auth()->id())->get();
 
         return view('home.going')->with([
             'going' => $eventsGoing,
