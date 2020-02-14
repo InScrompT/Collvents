@@ -62,4 +62,9 @@ class Event extends Model
     {
         return $this->hasMany(Ticket::class);
     }
+
+    public function collvents()
+    {
+        return $this->hasMany(Collvent::class);
+    }
 }
