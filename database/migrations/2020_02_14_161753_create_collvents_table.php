@@ -15,6 +15,13 @@ class CreateCollventsTable extends Migration
     {
         Schema::create('collvents', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('event_id');
+
+            $table->string('name');
+            $table->string('description', 2000);
+
+            $table->string('banner_img')->nullable(); //Feature once app is matured.
+
             $table->timestamps();
         });
     }
