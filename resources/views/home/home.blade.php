@@ -62,7 +62,12 @@
                                         </div>
                                         <div class="card-content">
                                             <p class="is-size-7 has-text-primary is-uppercase">jan 23, 12:20 am</p>
-                                            <p class="has-text-grey-dark is-uppercase event-title">{{ $event->name }}</p>
+                                            <p class="has-text-grey-dark is-uppercase event-title">
+                                                @if($event->draft)
+                                                    <span class="has-text-danger">DRAFT</span> &mdash;
+                                                @endif
+                                                {{ $event->name }}
+                                            </p>
                                             <a href="#" class="is-size-7 has-text-grey is-uppercase">
                                                 kcg college of technology
                                             </a>

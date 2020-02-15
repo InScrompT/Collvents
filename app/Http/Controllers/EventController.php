@@ -60,4 +60,11 @@ class EventController extends Controller
             route('collvent.create', $event->id)
         );
     }
+
+    public function fakeSave(Event $event)
+    {
+        return redirect()
+            ->to('home')
+            ->with('success', 'The event ' . $event->name . ' has been saved successfully');
+    }
 }

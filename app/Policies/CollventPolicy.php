@@ -49,13 +49,13 @@ class CollventPolicy
     /**
      * Determine whether the user can update the collvent.
      *
-     * @param  \App\User  $user
-     * @param  \App\Collvent  $collvent
+     * @param \App\User $user
+     * @param Event $event
      * @return mixed
      */
-    public function update(User $user, Collvent $collvent)
+    public function update(User $user, Event $event)
     {
-        //
+        return $user->id === $event->organizer->id;
     }
 
     /**

@@ -7,7 +7,7 @@
                 <div class="columns is-centered">
                     <div class="column is-8">
                         <h1 class="title">
-                            Add tickets to {{ $event_name }} event
+                            Add ticket to {{ $event->name }} event
                         </h1>
                     </div>
                 </div>
@@ -16,107 +16,70 @@
     </section>
     <div class="container">
         <section class="section">
-            <div class="has-margin-2">
-                <div class="notification has-text-centered-mobile">
-                    <div class="columns is-vcentered">
-                        <div class="column is-8">
-                            <span class="subtitle is-4 has-text-grey">Total Tickets: <span id="ticket-count">0</span></span>
+            <form action="{{ route('ticket.create', $event->id) }}" id="ticket-form" method="post">
+                @csrf
+
+                <div class="field">
+                    <label class="is-capitalized" for="name">ticket name</label>
+                    <div class="control">
+                        <input class="input" id="name" name="name" placeholder="Ticket Name" type="text">
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-6">
+                        <div class="field">
+                            <label class="is-capitalized" for="quantity-1">total quantity</label>
+                            <div class="control">
+                                <input class="input" id="quantity-1" name="quantity" type="number" value="100" min="0">
+                            </div>
                         </div>
-                        <div class="column is-4">
-                            <button class="button is-primary is-fullwidth is-uppercase" id="add-ticket">Add ticket</button>
+                    </div>
+                    <div class="column is-6">
+                        <div class="field">
+                            <label class="is-capitalized" for="price-1">ticket price</label>
+                            <div class="control">
+                                <input class="input" id="price-1" name="price" type="number" value="0" min="0">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <form action="{{ route('ticket.create', [$event_id]) }}" id="ticket-form" method="post">
-                @csrf
-
-                <span id="ticket-insert"></span>
-
-                <div class="field" style="display: none" id="ticket-submit">
+                <div class="field">
+                    <label class="is-capitalized" for="description">ticket description</label>
                     <div class="control">
-                        <input type="submit" value="Save Tickets" class="input button is-primary is-fullwidth is-uppercase">
+                        <textarea class="textarea" id="description" name="description"></textarea>
+                    </div>
+                </div>
+                {{-- TODO: Remove this feature or add it as an addition feature under a hidden dropdown --}}
+                {{--<div class="columns">
+                    <div class="column is-6">
+                        <div class="field">
+                            <label class="is-capitalized" for="min-book-1">minimum per booking</label>
+                            <div class="control">
+                                <input class="input" id="min-book-1" name="minimum" placeholder="1" type="number" value="1" min="1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-6">
+                        <div class="field">
+                            <label class="is-capitalized" for="max-book-1">maximum per booking</label>
+                            <div class="control">
+                                <input class="input" id="max-book-1" name="maximum" placeholder="100" type="number" value="1" min="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>--}}
+
+                <div class="notification has-margin-2">
+                    <div class="columns">
+                        <div class="column is-6">
+                            <a class="button is-warning is-fullwidth" href="{{ route('ticket.list', [$event->id]) }}">&xlarr; Go Back</a>
+                        </div>
+                        <div class="column is-6">
+                            <button class="button is-primary is-fullwidth" onclick="document.getElementById('ticket-form').submit()">Add Ticket &xrarr;</button>
+                        </div>
                     </div>
                 </div>
             </form>
         </section>
     </div>
-@endsection
-
-@section('scripts')
-    <script>
-        var ticketNumber = 0;
-
-        function saveForm(event) {
-            document.getElementById('ticket-form').submit();
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('add-ticket').addEventListener('click', function (event) {
-                ticketNumber++;
-                event.preventDefault();
-
-                if (ticketNumber > 0) {
-                    document.getElementById('ticket-submit').removeAttribute('style');
-                }
-
-                document.getElementById('ticket-count').innerText = `${ticketNumber}`;
-
-                var ticket = document.createElement('div');
-                ticket.classList = "has-margin-2";
-                ticket.innerHTML = `<div class="notification" id="ticket-${ticketNumber}">` +
-                    '<div class="field">' +
-                        '<label for="name" class="is-capitalized">ticket name</label>' +
-                        '<div class="control">' +
-                            '<input type="text" class="input" id="name" placeholder="Ticket Name" name="name[]">' +
-                        '</div>' +
-                    '</div>' +
-                    '<div class="columns">' +
-                        '<div class="column is-6">' +
-                            '<div class="field">' +
-                                `<label for="quantity-${ticketNumber}" class="is-capitalized">total quantity</label>` +
-                                '<div class="control">' +
-                                    `<input type="number" class="input" id="quantity-${ticketNumber}" name="quantity[]">` +
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="column is-6">' +
-                            '<div class="field">' +
-                                `<label for="price-${ticketNumber}" class="is-capitalized">ticket price</label>` +
-                                '<div class="control">' +
-                                    `<input type="number" class="input" id="price-${ticketNumber}" name="price[]">` +
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
-                    '<div class="field">' +
-                        '<label for="description" class="is-capitalized">ticket description</label>' +
-                        '<div class="control">' +
-                            '<textarea name="description[]" id="description" class="textarea"></textarea>' +
-                        '</div>' +
-                    '</div>' +
-                    '<div class="columns">' +
-                        '<div class="column is-6">' +
-                            '<div class="field">' +
-                                `<label for="min-book-${ticketNumber}" class="is-capitalized">minimum per booking</label>` +
-                                '<div class="control">' +
-                                    `<input type="number" class="input" id="min-book-${ticketNumber}" name="minimum[]" placeholder="1">` +
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="column is-6">' +
-                            '<div class="field">' +
-                                `<label for="max-book-${ticketNumber}" class="is-capitalized">maximum per booking</label>` +
-                                '<div class="control">' +
-                                    `<input type="number" class="input" id="max-book-${ticketNumber}" name="maximum[]" placeholder="100">` +
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
-                '</div>';
-
-                document.getElementById('ticket-insert').appendChild(ticket);
-            });
-        });
-    </script>
 @endsection

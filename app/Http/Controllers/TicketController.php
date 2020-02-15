@@ -18,8 +18,7 @@ class TicketController extends Controller
         $this->authorize('create', [Ticket::class, $event]);
 
         return view('ticket.create')->with([
-            'event_id' => $event->id,
-            'event_name' => $event->name,
+            'event' => $event,
         ]);
     }
 
@@ -27,25 +26,40 @@ class TicketController extends Controller
      * @param Event $event
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function processCreate(Event $event)
     {
         $this->authorize('create', [Ticket::class, $event]);
+        $this->validate(request(), [
+            'name' => 'required|max:50',
+            'description' => 'required|max:200',
+            'quantity' => 'required|numeric',
+            'price' => 'required|numeric',
+        ]);
 
-        for ($i = 0; $i < count(request()->get('name')); $i++) {
-            Ticket::create([
-                'event_id' => $event->id,
-                'name' => request()->get('name')[$i],
-                'description' => request()->get('description')[$i],
-                'quantity' => request()->get('quantity')[$i],
-                'price' => request()->get('price')[$i],
-                'maximum' => request()->get('maximum')[$i],
-                'minimum' => request()->get('minimum')[$i]
-            ]);
-        }
+        Ticket::create([
+            'event_id' => $event->id,
+            'name' => request()->get('name'),
+            'description' => request()->get('description'),
+            'quantity' => request()->get('quantity'),
+            'price' => request()->get('price'),
+            // TODO: Think of a better implementation in the user interface side and then
+            // make this as a feature
+            'maximum' => 0,
+            'minimum' => 0,
+        ]);
 
         return redirect()
-            ->to(route('home'))
-            ->with('success', 'Your event ' . $event->name . ' has been successfully created');
+            ->to(route('ticket.list', $event->id))
+            ->with('success', 'Ticket has been added to ' . $event->name . ' event');
+    }
+
+    public function list(Event $event)
+    {
+        return view('ticket.list')->with([
+            'event' => $event,
+            'tickets' => $event->tickets,
+        ]);
     }
 }

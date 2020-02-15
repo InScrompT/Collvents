@@ -15,6 +15,7 @@ Route::get('/', 'EventController@all')->name('index');
 
 Route::prefix('event')->name('event.')->group(function () {
     Route::get('create', 'EventController@showCreate')->name('create');
+    Route::get('save/{event}', 'EventController@fakeSave')->name('fake.save');
 
     Route::post('create', 'EventController@processCreate');
 });
@@ -38,6 +39,7 @@ Route::prefix('college')->middleware('auth')->name('college.')->group(function (
     Route::post('create', 'CollegeController@processCreate');
 });
 Route::prefix('ticket')->middleware('auth')->name('ticket')->group(function () {
+    Route::get('list/{event}', 'TicketController@list')->name('.list');
     Route::get('create/{event}', 'TicketController@showCreate')
         ->name('.create');
 

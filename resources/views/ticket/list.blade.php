@@ -7,7 +7,7 @@
                 <div class="columns is-centered">
                     <div class="column is-8">
                         <h1 class="title">
-                            List of sub-events for {{ $event->name }} event
+                            List of tickets for {{ $event->name }} event
                         </h1>
                     </div>
                 </div>
@@ -22,32 +22,35 @@
                 </div>
             @endif
 
-            @can('create', [App\Ticket::class, $event])
-                <div class="notification">
-                    <div class="columns is-vcentered">
-                        <div class="column is-8">
-                            <span class="title is-4 has-text-grey-light">Want to add tickets now?</span>
-                        </div>
-                        <div class="column is-4">
-                            <a href="{{ route('ticket.list', $event->id) }}" class="button is-fullwidth is-info">Add Tickets</a>
+            @if(count($tickets))
+                @can('create', [App\Ticket::class, $event])
+                    <div class="notification">
+                        <div class="columns is-vcentered">
+                            <div class="column is-8">
+                                <span class="title is-4 has-text-grey-light">Wanna save the event and publish?</span>
+                            </div>
+                            <div class="column is-4">
+                                <a href="{{ route('event.fake.save', $event->id) }}" class="button is-fullwidth is-info">Save Event</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endcan
+                @endcan
+            @endif
 
             <div class="columns is-multiline">
-                @if(count($collvents))
-                    @foreach($collvents as $collvent)
+                @if(count($tickets))
+                    @foreach($tickets as $ticket)
                         <div class="column is-6">
                             <div class="card">
                                 <div class="card-content">
-                                    <p class="has-text-grey-dark is-uppercase is-size-5" style="padding-bottom: 10px">
-                                        {{ $collvent->name }}
-                                        @can('update', [App\Collvent::class, $event])
+                                    <p class="is-size-5 has-text-grey-dark is-uppercase">
+                                        {{ $ticket->name }} &mdash; ₹ {{ $ticket->price }}
+                                        @can('update', [App\Ticket::class, $event])
                                             &mdash; <a href="">Edit</a>
                                         @endcan
                                     </p>
-                                    <p class="is-size-6 has-text-grey">{{ $collvent->description }}</p>
+                                    <p class="is-size-6 has-text-grey">Quantity: {{ $ticket->quantity }}</p>
+                                    <p class="is-size-6 has-text-grey">{{ $ticket->description }}</p>
                                 </div>
                             </div>
                         </div>
@@ -55,19 +58,19 @@
                 @else
                     <div class="column is-12">
                         <div class="notification has-text-centered">
-                            <span class="title is-4 has-text-grey-light">No sub-events added to this event yet.</span>
+                            <span class="title is-4 has-text-grey-light">No tickets added to this event yet.</span>
                         </div>
                     </div>
                 @endif
             </div>
         </div>
     </section>
-    @can('create', [App\Collvent::class, $event])
+    @can('create', [App\Ticket::class, $event])
         <section>
             <div class="container">
                 <div class="columns">
                     <div class="column is-12">
-                        <a class="button is-primary is-fullwidth is-uppercase" href="{{ route('collvent.create', [$event->id]) }}">Add Sub-event</a>
+                        <a class="button is-primary is-fullwidth is-uppercase" href="{{ route('ticket.create', [$event->id]) }}">Add ticket</a>
                     </div>
                 </div>
             </div>
