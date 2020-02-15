@@ -74,4 +74,9 @@ class EventPolicy
             ->where('role', 0)
             ->first()->event_id === $event->id;
     }
+
+    public function describe(User $user, Event $event)
+    {
+        return $user->id === $event->organizer->id;
+    }
 }

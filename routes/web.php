@@ -16,6 +16,7 @@ Route::get('/', 'EventController@all')->name('index');
 Route::prefix('event')->name('event.')->group(function () {
     Route::get('create', 'EventController@showCreate')->name('create');
     Route::get('save/{event}', 'EventController@fakeSave')->name('fake.save');
+    Route::get('describe/{event}', 'EventController@describe')->name('describe');
 
     Route::post('create', 'EventController@processCreate');
 });

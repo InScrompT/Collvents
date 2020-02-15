@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\College;
 use App\Event;
+use App\Ticket;
+use App\Transaction;
 
 class EventController extends Controller
 {
+    protected $totalRevenue = 0;
+    protected $totalTicketsSold = 0;
+
     public function __construct()
     {
         $this->middleware('auth')->except('all');
@@ -66,5 +71,29 @@ class EventController extends Controller
         return redirect()
             ->to('home')
             ->with('success', 'The event ' . $event->name . ' has been saved successfully');
+    }
+
+    public function describe(Event $event)
+    {
+        $this->authorize('describe', $event);
+
+        Ticket::whereEventId($event->id)->get()
+            ->reject(function (Ticket $ticket) {
+                return $ticket->buyers->count() === 0;
+            })
+            ->map(function (Ticket $ticket) {
+                $buyerCount = $ticket->buyers->count();
+
+                $this->totalRevenue += $ticket->price * $buyerCount;
+                $this->totalTicketsSold += $buyerCount;
+            });
+
+        return view('events.describe')->with([
+            'event' => $event,
+            'tickets' => $event->tickets,
+            'collvents' => $event->collvents,
+            'total_revenue' => $this->totalRevenue,
+            'tickets_sold' => $this->totalTicketsSold,
+        ]);
     }
 }

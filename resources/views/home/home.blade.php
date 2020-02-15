@@ -77,7 +77,7 @@
                                         </div>
                                         <div class="card-footer">
                                             <div class="card-footer-item">
-                                                <a href="" class="button is-danger is-fullwidth is-uppercase">Edit</a>
+                                                <a href="{{ route('event.describe', $event->id) }}" class="button is-danger is-fullwidth is-uppercase">Edit</a>
                                             </div>
                                         </div>
                                     </div>
