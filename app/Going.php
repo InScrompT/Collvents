@@ -23,6 +23,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Going whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Going whereUserId($value)
  * @mixin \Eloquent
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Going whereDeletedAt($value)
  */
 class Going extends Model
 {

@@ -47,6 +47,8 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCollegeId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
  * @property-read int|null $roles_count
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereDeletedAt($value)
  */
 class User extends Authenticatable
 {

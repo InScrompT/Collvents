@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\College whereTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\College whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\College whereDeletedAt($value)
  */
 class College extends Model
 {

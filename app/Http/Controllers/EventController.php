@@ -57,7 +57,7 @@ class EventController extends Controller
         ]);
 
         return redirect()->to(
-            route('ticket.create', $event->id)
+            route('collvent.create', $event->id)
         );
     }
 }

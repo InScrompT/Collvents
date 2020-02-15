@@ -36,6 +36,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereQuantity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $maximum
+ * @property int $minimum
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereMaximum($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereMinimum($value)
  */
 class Ticket extends Model
 {

@@ -32,6 +32,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Profile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Profile whereUserId($value)
  * @mixin \Eloquent
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Profile whereDeletedAt($value)
  */
 class Profile extends Model
 {

@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Transaction whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Transaction whereUserId($value)
  * @mixin \Eloquent
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Transaction whereDeletedAt($value)
  */
 class Transaction extends Model
 {

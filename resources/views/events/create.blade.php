@@ -23,7 +23,7 @@
                     </div>
                     <form action="{{ route('event.create') }}" method="post" id="eventForm">
 
-                        {{ csrf_field() }}
+                        @csrf
 
                         <div class="has-margin-2">
                             <span class="is-size-4 has-text-grey-light">Create a new event...</span>

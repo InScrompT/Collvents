@@ -14,7 +14,10 @@ class CollventController extends Controller
      */
     public function list(Event $event)
     {
-        return view('collvent.list');
+        return view('collvent.list')->with([
+            'event' => $event,
+            'collvents' => $event->collvents
+        ]);
     }
 
     /**
@@ -26,7 +29,9 @@ class CollventController extends Controller
     {
         $this->authorize('create', [Collvent::class, $event]);
 
-        return view('collvent.create');
+        return view('collvent.create')->with([
+            'event' => $event
+        ]);
     }
 
     /**
@@ -38,6 +43,19 @@ class CollventController extends Controller
     {
         $this->authorize('create', [Collvent::class, $event]);
 
-        return request()->all();
+        $this->validate(request(), [
+            'name' => 'required|max:100',
+            'description' => 'required|max:400'
+        ]);
+
+        Collvent::create([
+            'event_id' => $event->id,
+            'name' => request()->get('name'),
+            'description' => request()->get('description'),
+        ]);
+
+        return redirect()
+            ->to(route('collvent.list', $event->id))
+            ->with('success', 'The Sub-Event has been added to ' . $event->name . ' successfully');
     }
 }

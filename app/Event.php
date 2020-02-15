@@ -40,6 +40,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Event wherePincode($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
  * @property-read int|null $roles_count
+ * @property string $start_date
+ * @property string $end_date
+ * @property int $draft
+ * @property string|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Collvent[] $collvents
+ * @property-read int|null $collvents_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereDraft($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereStartDate($value)
  */
 class Event extends Model
 {
