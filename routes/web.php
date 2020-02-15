@@ -43,3 +43,9 @@ Route::prefix('ticket')->middleware('auth')->name('ticket')->group(function () {
 
     Route::post('create/{event}', 'TicketController@processCreate');
 });
+Route::prefix('collvent')->name('collvent')->group(function () {
+    Route::get('list/{event}', 'CollventController@list')->name('.list');
+    Route::get('create/{event}', 'CollventController@showCreate')->name('.create');
+
+    Route::post('create/{event}', 'CollventController@processCreate');
+});
