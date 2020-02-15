@@ -11,12 +11,11 @@ class TicketController extends Controller
     /**
      * @param Event $event
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function showCreate(Event $event)
     {
-        if (! \Auth::user()->can('create', [Ticket::class, $event])) {
-            abort(403);
-        }
+        $this->authorize('create', [Ticket::class, $event]);
 
         return view('ticket.create')->with([
             'event_id' => $event->id,
@@ -27,12 +26,11 @@ class TicketController extends Controller
     /**
      * @param Event $event
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function processCreate(Event $event)
     {
-        if (! \Auth::user()->can('create', [Ticket::class, $event])) {
-            abort(403);
-        }
+        $this->authorize('create', [Ticket::class, $event]);
 
         for ($i = 0; $i < count(request()->get('name')); $i++) {
             Ticket::create([
@@ -46,6 +44,8 @@ class TicketController extends Controller
             ]);
         }
 
-        return redirect()->to(route('home'))->with('success', 'Your event ' . $event->name . ' has been successfully created');
+        return redirect()
+            ->to(route('home'))
+            ->with('success', 'Your event ' . $event->name . ' has been successfully created');
     }
 }

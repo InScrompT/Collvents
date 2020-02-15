@@ -7,11 +7,16 @@
                 <div class="columns is-centered">
                     <div class="column is-8">
                         <h1 class="title">
-                            Add sub-events to your {{ $event_name }} main event
+                            List of sub-events for {{ $event_name }} main event
                         </h1>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            
         </div>
     </section>
 @endsection
