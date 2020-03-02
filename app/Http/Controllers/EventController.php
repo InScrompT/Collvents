@@ -6,6 +6,7 @@ use App\College;
 use App\Event;
 use App\Ticket;
 use App\Transaction;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -19,17 +20,9 @@ class EventController extends Controller
 
     public function all()
     {
-        $cityEvents = College::whereCity('chennai')->limit(4)->get();
-        $statEvents = College::whereState('tamilnadu')->limit(4)->get();
-        $aoiEvents = College::where('city', '!=', 'chennai')
-            ->where('state', '!=', 'tamil nadu')
-            ->limit(4)->get();
+        $events = Event::limit(16)->get();
 
-        return view('welcome')->with([
-            'city' => $cityEvents,
-            'state' => $statEvents,
-            'india' => $aoiEvents
-        ]);
+        return view('welcome')->with('events', $events);
     }
 
     public function showCreate()
@@ -54,11 +47,11 @@ class EventController extends Controller
             'description'   => request()->get('description'),
             'user_id'       => auth()->id(),
             'college_id'    => 0, // TODO: make it working, ASAP
-            'start_time'    => request()->get('start_time'),
             'start_date'    => request()->get('start_date'),
-            'end_time'      => request()->get('end_time'),
+            'start_time'    => Carbon::parse(request()->get('start_time'))->toTimeString(),
+            'end_time'      => Carbon::parse(request()->get('end_time'))->toTimeString(),
             'end_date'      => request()->get('end_date'),
-            'draft'         => true
+            'draft'         => false,
         ]);
 
         return redirect()->to(
@@ -95,5 +88,33 @@ class EventController extends Controller
             'total_revenue' => $this->totalRevenue,
             'tickets_sold' => $this->totalTicketsSold,
         ]);
+    }
+
+    public function delete(Event $event)
+    {
+        $this->authorize('delete', $event);
+        $event->delete();
+
+        return redirect()->to(route('home'))->with(
+            'success', 'The event ' . $event->name . ' has been deleted'
+        );
+    }
+
+    public function drafter(Event $event)
+    {
+        $this->authorize('draft', $event);
+
+        $event->draft = !$event->draft;
+        $event->saveOrFail();
+
+        if ($event->draft) {
+            return redirect()->to(route('home'))->with(
+                'success', 'The event ' . $event->name . ' has been drafted'
+            );
+        }
+
+        return redirect()->to(route('home'))->with(
+            'success', 'The event ' . $event->name . ' has been un-drafted'
+        );
     }
 }

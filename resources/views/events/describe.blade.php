@@ -84,4 +84,30 @@
             </div>
         </div>
     </section>
+    <section class="section">
+        <div class="container">
+            <div class="notification is-outlined">
+                <p class="title is-4 has-text-centered has-text-grey-light">Danger Zone</p>
+                <div class="columns has-margin-2">
+                    <div class="column is-6 center">
+                        <a onclick="event.preventDefault();document.getElementById('delete-form').submit()" class="button is-danger is-fullwidth">Delete this event</a>
+                    </div>
+                    <div class="column is-6">
+                        @if($event->draft)
+                            <a onclick="event.preventDefault();document.getElementById('drafter-form').submit()" class="button is-warning is-fullwidth">Mark as Draft</a>
+                        @else
+                            <a onclick="event.preventDefault();document.getElementById('drafter-form').submit()" class="button is-warning is-fullwidth">Un-draft event</a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <form action="{{ route('event.drafter', $event->id) }}" method="post" id="drafter-form" style="display: none;">
+        @csrf
+    </form>
+    <form action="{{ route('event.delete', $event->id) }}" method="post" id="delete-form" style="display: none;">
+        @csrf
+    </form>
 @endsection
