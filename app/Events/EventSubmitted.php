@@ -2,23 +2,20 @@
 
 namespace App\Events;
 
-use App\Transaction;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TransactionSuccess
+class EventSubmitted
 {
     use Dispatchable, SerializesModels;
-
-    public $transaction;
 
     /**
      * Create a new event instance.
      *
-     * @param Transaction $transaction
+     * @return void
      */
-    public function __construct(Transaction $transaction)
+    public function __construct()
     {
-        $this->transaction = $transaction;
+        //
     }
 }
