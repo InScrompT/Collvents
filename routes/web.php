@@ -19,6 +19,8 @@ Route::prefix('event')->name('event.')->group(function () {
     Route::get('describe/{event}', 'EventController@describe')->name('describe');
 
     Route::post('create', 'EventController@processCreate');
+    Route::post('delete/{event}', 'EventController@delete')->name('delete');
+    Route::post('drafter/{event}', 'EventController@drafter')->name('drafter');
 });
 Route::prefix('auth')->namespace('Auth')->name('auth')->group(function () {
     Route::get('login', 'PasswordlessAuth@showLoginPage')->name('.login');

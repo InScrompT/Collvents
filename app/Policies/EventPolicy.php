@@ -30,7 +30,7 @@ class EventPolicy
      */
     public function update(User $user, Event $event)
     {
-         return $user->roles->firstWhere('event_id', $event->id)->event_id === $event->id;
+        return $user->id === $event->organizer->id;
     }
 
     /**
@@ -42,10 +42,7 @@ class EventPolicy
      */
     public function delete(User $user, Event $event)
     {
-        return $user->roles
-            ->where('event_id', $event->id)
-            ->where('role', 0)
-            ->first()->event_id === $event->id;
+        return $user->id === $event->organizer->id;
     }
 
     /**
@@ -57,7 +54,7 @@ class EventPolicy
      */
     public function restore(User $user, Event $event)
     {
-        return $user->roles->firstWhere('event_id', $event->id)->event_id === $event->id;
+        return $user->id === $event->organizer->id;
     }
 
     /**
@@ -69,13 +66,15 @@ class EventPolicy
      */
     public function forceDelete(User $user, Event $event)
     {
-        return $user->roles
-            ->where('event_id', $event->id)
-            ->where('role', 0)
-            ->first()->event_id === $event->id;
+        return $user->id === $event->organizer->id;
     }
 
     public function describe(User $user, Event $event)
+    {
+        return $user->id === $event->organizer->id;
+    }
+
+    public function draft(User $user, Event $event)
     {
         return $user->id === $event->organizer->id;
     }
