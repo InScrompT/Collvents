@@ -39,6 +39,29 @@ class IndexElasticSearch extends Command
      */
     public function handle()
     {
-        // Chunk retrieve college data, insert it in bulk to elasticsearch
+        College::select(['id', 'name', 'city', 'state'])->chunk(500, function ($colleges) {
+            $data = [
+                'index' => 'college',
+                'type' => 'college',
+                'body' => []
+            ];
+
+            /**
+             * @var \App\College $college
+             */
+            foreach ($colleges as $college) {
+                $data['body'][] = [
+                    'index' => [
+                        '_index' => 'college',
+                        '_type' => 'college',
+                        '_id' => $college->toArray()['id']
+                    ]
+                ];
+
+                $data['body'][] = $college->toArray();
+            }
+
+            \Elasticsearch::bulk($data);
+        });
     }
 }

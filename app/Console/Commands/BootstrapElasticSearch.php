@@ -40,7 +40,7 @@ class BootstrapElasticSearch extends Command
         $this->line('Creating index into elasticsearch engine');
 
         \Elasticsearch::indices()->create([
-            'index' => strtolower(env('APP_NAME')) . '_college',
+            'index' => 'college',
             'body' => [
                 'mappings' => [
                     'properties' => [
@@ -55,7 +55,7 @@ class BootstrapElasticSearch extends Command
         $this->info('Mapped college structure to elasticsearch engine');
 
         \Elasticsearch::indices()->create([
-            'index' => strtolower(env('APP_NAME')) . '_event',
+            'index' => 'event',
             'body' => [
                 'mappings' => [
                     'properties' => [

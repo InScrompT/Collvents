@@ -42,10 +42,10 @@ class DeleteMapsElasticSearch extends Command
             return;
         }
 
-        \Elasticsearch::indices()->delete(['index' => strtolower(env('APP_NAME')) . '_event']);
+        \Elasticsearch::indices()->delete(['index' => 'event']);
         $this->info('Deleted event index successfully');
 
-        \Elasticsearch::indices()->delete(['index' => strtolower(env('APP_NAME')) . '_college']);
+        \Elasticsearch::indices()->delete(['index' => 'college']);
         $this->info('Deleted college index successfully');
     }
 }
