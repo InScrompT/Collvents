@@ -41,16 +41,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Event wherePincode($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
  * @property-read int|null $roles_count
- * @property string $start_date
- * @property string $end_date
+ * @property string|\Illuminate\Support\Carbon $start_date
+ * @property string|\Illuminate\Support\Carbon $end_date
  * @property int $draft
- * @property string|null $deleted_at
+ * @property string|\Illuminate\Support\Carbon $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Collvent[] $collvents
  * @property-read int|null $collvents_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereDraft($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereEndDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereStartDate($value)
+ * @property-read \App\College $college
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\App\Event onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Query\Builder|\App\Event withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Event withoutTrashed()
  */
 class Event extends Model
 {
@@ -66,7 +72,7 @@ class Event extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'start_date', 'end_date'];
 
     public function organizer()
     {
@@ -86,5 +92,10 @@ class Event extends Model
     public function collvents()
     {
         return $this->hasMany(Collvent::class);
+    }
+
+    public function college()
+    {
+        return $this->belongsTo(College::class);
     }
 }

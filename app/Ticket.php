@@ -47,6 +47,13 @@ class Ticket extends Model
 {
     protected $fillable = ['event_id', 'name', 'description', 'quantity', 'price', 'minimum', 'maximum'];
 
+    protected $casts = [
+        'price' => 'float',
+        'quantity' => 'integer',
+        'maximum' => 'integer',
+        'minimum' => 'integer',
+    ];
+
     public function event()
     {
         return $this->belongsTo(Event::class);

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\College;
 use App\Event;
 use App\Ticket;
-use App\Transaction;
 use Carbon\Carbon;
 
 class EventController extends Controller
@@ -15,7 +13,7 @@ class EventController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('all');
+        $this->middleware('auth')->except(['all', 'display']);
     }
 
     public function all()
@@ -28,6 +26,14 @@ class EventController extends Controller
     public function showCreate()
     {
         return view('events.create');
+    }
+
+    public function display(Event $event)
+    {
+        return view('events.display')->with([
+            'event' => $event,
+            'onwards' => $event->tickets->sortBy('price')->first()
+        ]);
     }
 
     public function processCreate()
@@ -46,12 +52,12 @@ class EventController extends Controller
             'name'          => request()->get('name'),
             'description'   => request()->get('description'),
             'user_id'       => auth()->id(),
-            'college_id'    => 0, // TODO: make it working, ASAP
+            'college_id'    => 1, // TODO: make it working, ASAP
             'start_date'    => request()->get('start_date'),
             'start_time'    => Carbon::parse(request()->get('start_time'))->toTimeString(),
             'end_time'      => Carbon::parse(request()->get('end_time'))->toTimeString(),
             'end_date'      => request()->get('end_date'),
-            'draft'         => false,
+            'draft'         => true,
         ]);
 
         return redirect()->to(
@@ -61,6 +67,9 @@ class EventController extends Controller
 
     public function fakeSave(Event $event)
     {
+        $event->draft = false;
+        $event->saveOrFail();
+
         return redirect()
             ->to('home')
             ->with('success', 'The event ' . $event->name . ' has been saved successfully');

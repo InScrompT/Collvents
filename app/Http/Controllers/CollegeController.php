@@ -31,4 +31,9 @@ class CollegeController extends Controller
             ->to(route('home'))
             ->with('success', 'The college has been added to ' . env('APP_NAME') . ' successfully');
     }
+
+    public function search($name)
+    {
+        return College::search($name)->get();
+    }
 }
