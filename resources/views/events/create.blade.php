@@ -38,6 +38,13 @@
 
                         <div class="field">
                             <div class="control">
+                                <label for="tagline">Event Tagline</label>
+                                <input type="text" name="tagline" class="input" id="tagline" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
                                 <label for="college">College Name</label>
                                 <input type="text" name="college" class="input" id="college" required>
                             </div>
