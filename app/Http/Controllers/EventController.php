@@ -8,8 +8,9 @@ use Carbon\Carbon;
 
 class EventController extends Controller
 {
-    protected $totalRevenue = 0;
-    protected $totalTicketsSold = 0;
+    private $totalRevenue = 0;
+    private $totalTicketsSold = 0;
+    private $totalAttendeeAllowed = 0;
 
     public function __construct()
     {
@@ -30,9 +31,14 @@ class EventController extends Controller
 
     public function display(Event $event)
     {
+        $event->tickets->each(function (Ticket $ticket) {
+            $this->totalAttendeeAllowed += $ticket->quantity;
+        });
+
         return view('events.display')->with([
             'event' => $event,
-            'onwards' => $event->tickets->sortBy('price')->first()
+            'onwards' => $event->tickets->sortBy('price')->first(),
+            'totalAttendee' => $this->totalAttendeeAllowed,
         ]);
     }
 

@@ -36,7 +36,7 @@
                                     </figure>
                                 </div>
                                 <div class="card-content">
-                                    <p class="is-size-7 has-text-primary is-uppercase">{{ $event->start_date->toFormattedDateString() }}, {{ $event->start_time }}</p>
+                                    <p class="is-size-7 has-text-primary is-uppercase">{{ $event->start_date->toFormattedDateString() }}, {{ date('h:i A', strtotime($event->start_time)) }}</p>
                                     <p class="has-text-grey-dark is-uppercase event-title">{{ $event->name }}</p>
                                     <a href="#" class="is-size-7 has-text-grey is-uppercase">
                                         {{ $event->college->name }}
