@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  server:
+    image: docker.pkg.github.com/inscrompt/collvents/webapp:working
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - mysql
+      - redis
+      - php
+
+  mysql:
+    image:
+    volumes:
+      - mysql-data
+    ports:
+      -
+
+  redis:
+    image:
+    ports:
+      -
+
+  php:
+    image:
+    ports:
+      -
