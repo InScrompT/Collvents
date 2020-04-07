@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Ticket;
-use Composer\Package\Link;
 
 class TicketController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('buy');
+    }
+
     /**
      * @param Event $event
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -61,5 +65,15 @@ class TicketController extends Controller
             'event' => $event,
             'tickets' => $event->tickets,
         ]);
+    }
+
+    public function buy(Event $event)
+    {
+
+    }
+
+    public function processBuy(Event $event)
+    {
+
     }
 }
