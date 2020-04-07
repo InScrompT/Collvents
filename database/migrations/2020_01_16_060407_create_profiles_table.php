@@ -15,13 +15,11 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('college_id');
 
-            $table->string('name')->default('User');
-            $table->string('college');
-            $table->string('degree');
-            $table->string('course');
-            $table->string('phone');
+            $table->string('name');
+            $table->unsignedBigInteger('phone');
 
             $table->date('birthday');
             $table->softDeletes();

@@ -41,6 +41,10 @@ class Profile extends Model
         'user_id', 'name', 'college', 'degree', 'course', 'phone', 'birthday'
     ];
 
+    protected $dates = [
+        'birthday'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

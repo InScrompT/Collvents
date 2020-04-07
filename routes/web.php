@@ -13,15 +13,15 @@
 
 Route::get('/', 'EventController@all')->name('index');
 
-Route::prefix('event')->name('event.')->group(function () {
-    Route::get('display/{event}', 'EventController@display')->name('display');
-    Route::get('create', 'EventController@showCreate')->name('create');
-    Route::get('save/{event}', 'EventController@fakeSave')->name('fake.save');
-    Route::get('describe/{event}', 'EventController@describe')->name('describe');
+Route::prefix('event')->name('event')->group(function () {
+    Route::get('display/{event}', 'EventController@display')->name('.display');
+    Route::get('create', 'EventController@showCreate')->name('.create');
+    Route::get('save/{event}', 'EventController@fakeSave')->name('.fake.save');
+    Route::get('describe/{event}', 'EventController@describe')->name('.describe');
 
     Route::post('create', 'EventController@processCreate');
-    Route::post('delete/{event}', 'EventController@delete')->name('delete');
-    Route::post('drafter/{event}', 'EventController@drafter')->name('drafter');
+    Route::post('delete/{event}', 'EventController@delete')->name('.delete');
+    Route::post('drafter/{event}', 'EventController@drafter')->name('.drafter');
 });
 Route::prefix('auth')->namespace('Auth')->name('auth')->group(function () {
     Route::get('login', 'PasswordlessAuth@showLoginPage')->name('.login');
@@ -42,11 +42,13 @@ Route::prefix('college')->middleware('auth')->name('college.')->group(function (
 
     Route::post('create', 'CollegeController@processCreate');
 });
-Route::prefix('ticket')->middleware('auth')->name('ticket')->group(function () {
+Route::prefix('ticket')->name('ticket')->group(function () {
+    Route::get('buy/{event}', 'TicketController@buy')->name('.buy');
     Route::get('list/{event}', 'TicketController@list')->name('.list');
     Route::get('create/{event}', 'TicketController@showCreate')
         ->name('.create');
 
+    Route::get('buy/{event}', 'TicketController@processBuy');
     Route::post('create/{event}', 'TicketController@processCreate');
 });
 Route::prefix('collvent')->name('collvent')->group(function () {
@@ -57,4 +59,10 @@ Route::prefix('collvent')->name('collvent')->group(function () {
 });
 Route::prefix('college')->name('college')->group(function () {
     Route::get('search/{name}', 'CollegeController@search')->name('.search');
+});
+Route::prefix('profile')->name('profile')->group(function () {
+    Route::get('show', 'ProfileController@show')->name('.show');
+    Route::get('edit', 'ProfileController@edit')->name('.edit');
+
+    Route::post('edit', 'ProfileController@processEdit');
 });
