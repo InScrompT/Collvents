@@ -48,7 +48,7 @@ Route::prefix('ticket')->name('ticket')->group(function () {
     Route::get('create/{event}', 'TicketController@showCreate')
         ->name('.create');
 
-    Route::get('buy/{event}', 'TicketController@processBuy');
+    Route::post('buy/{event}', 'TicketController@processBuy');
     Route::post('create/{event}', 'TicketController@processCreate');
 });
 Route::prefix('collvent')->name('collvent')->group(function () {
