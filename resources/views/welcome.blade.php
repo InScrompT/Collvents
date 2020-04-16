@@ -23,8 +23,9 @@
     <section class="section">
         <div class="container">
             <div class="has-margin-2">
-                <span class="is-size-4 has-text-grey-light">New Events...</span>
+                <span class="is-size-4 has-text-grey-light">Featured Events...</span>
             </div>
+
             <div class="columns">
                 @if(isset($events))
                     @foreach($events as $event)
@@ -55,9 +56,9 @@
                     @endforeach
                 @endif
             </div>
-            {{--<div class="is-pulled-right">
+            <div class="is-pulled-right">
                 <a href="#" class="is-info">...load more events</a>
-            </div>--}}
+            </div>
         </div>
     </section>
 @endsection

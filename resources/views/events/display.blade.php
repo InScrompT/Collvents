@@ -82,48 +82,51 @@
 @endsection
 
 @section('content')
-    <div class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8">
-                    <div class="title">
-                        {{ $event->name }}
+    <section class="hero is-info is-medium">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-8">
+                        <div class="title">
+                            {{ $event->name }}
+                        </div>
+                        <div class="subtitle">
+                            A tagline here so that people can understand what it's all about <br /><br />
+                            {{ $event->college->name }} &mdash; {{ $event->college->city }}, {{ $event->college->state }}
+                        </div>
                     </div>
-                    <div class="subtitle">
-                        Another event, that mean nothing to you, but experience is what that differs
-                    </div>
-                </div>
-                <div class="column is-4">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="level is-mobile">
-                                <a class="level-item has-text-centered instagram">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a class="level-item has-text-centered whatsapp">
-                                    <i class="fab fa-whatsapp"></i>
-                                </a>
-                                <a class="level-item has-text-centered facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('event.display', $event->id)) }}&title={{ urlencode('Book your tickets and let\'s meet up at ' . $event->name . ' event. It will be awesome') }}">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a target="_blank" class="level-item has-text-centered twitter" href="https://twitter.com/intent/tweet?text={{ urlencode('Book your tickets and let\'s meet up at ' . $event->name . ' event. It will be awesome') }}&url={{ urlencode(route('event.display', $event->id)) }}&hashtags={{ urlencode('InCollvents #BookYourTickets') }}">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
+                    <div class="column is-4">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="level is-mobile">
+                                    <a class="level-item has-text-centered instagram">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a class="level-item has-text-centered whatsapp">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a class="level-item has-text-centered facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('event.display', $event->id)) }}&title={{ urlencode('Book your tickets and let\'s meet up at ' . $event->name . ' event. It will be awesome') }}">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a target="_blank" class="level-item has-text-centered twitter" href="https://twitter.com/intent/tweet?text={{ urlencode('Book your tickets and let\'s meet up at ' . $event->name . ' event. It will be awesome') }}&url={{ urlencode(route('event.display', $event->id)) }}&hashtags={{ urlencode('InCollvents #BookYourTickets') }}">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <section>
+    </section>
+    <section class="has-margin-2">
         <div class="container">
             <div class="columns">
                 <div class="column is-12">
                     <div class="card is-fullwidth">
                         <div class="card-image">
                             <figure class="image is-3by1">
-                                <img src="https://via.placeholder.com/1080" alt="Placeholder image">
+                                <img src="https://via.placeholder.com/1080?text=Custom+Banner+Image+Here" alt="Placeholder image">
                             </figure>
                         </div>
                     </div>
@@ -152,7 +155,7 @@
                         </div>
                         <footer class="card-footer">
                             <span class="card-footer-item">
-                                <a href="#" class="button is-primary is-fullwidth is-uppercase has-text-weight-bold">book now</a>
+                                <a href="{{ route('ticket.buy', $event->id) }}" class="button is-primary is-fullwidth is-uppercase has-text-weight-bold">book now</a>
                             </span>
                         </footer>
                     </div>

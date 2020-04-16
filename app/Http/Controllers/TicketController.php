@@ -69,7 +69,9 @@ class TicketController extends Controller
 
     public function buy(Event $event)
     {
-
+        return view('ticket.display')->with([
+            'event' => $event
+        ]);
     }
 
     public function processBuy(Event $event)
