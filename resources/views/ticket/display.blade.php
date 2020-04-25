@@ -26,21 +26,18 @@
                         <div class="card @if(! $loop->first) has-margin-2 @endif">
                             <div class="card-content">
                                 <div class="columns level">
-                                    <div class="column is-6 level-item">
-                                        <p class="is-size-4 is-bold">{{ $ticket->name }}</p>
+                                    <div class="column is-9 level-item">
+                                        <p class="is-size-4 is-bold">
+                                            {{ $ticket->name }}
+                                            &mdash;
+                                            <span class="is-size-5 is-normal">
+                                                @if($ticket->price == 0) FREE @else {{ $ticket->price }} /- @endif
+                                            </span>
+                                        </p>
                                         <p class="is-size-6">{{ $ticket->description }}</p>
                                     </div>
-                                    <div class="column is-3 has-text-centered level-item">
-                                        <p class="is-size-5 is-bold">
-                                            @if($ticket->price == 0)
-                                                FREE
-                                            @else
-                                                {{ $ticket->price }} /-
-                                            @endif
-                                        </p>
-                                    </div>
                                     <div class="column is-3 level-item">
-                                        <div class="columns">
+                                        <div class="columns is-mobile">
                                             <div class="column is-4">
                                                 <button class="button is-primary is-outlined is-fullwidth">-</button>
                                             </div>
