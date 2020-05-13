@@ -16,10 +16,16 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->bigInteger('ticket_id');
-            $table->bigInteger('user_id');
+            $table->unsignedBigInteger('event_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('total_price');
+            $table->unsignedBigInteger('service_charge');
+            $table->unsignedBigInteger('gst_charge');
+            $table->unsignedBigInteger('gateway_charge');
 
-            $table->integer('quantity')->default(1);
+            $table->string('razorpay_order_id');
+            $table->string('razorpay_payment_id');
+            $table->string('razorpay_signature');
 
             $table->softDeletes();
             $table->timestamps();

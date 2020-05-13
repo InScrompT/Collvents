@@ -12,7 +12,7 @@ services:
       - php
 
   mysql:
-    image:
+    image: mariadb:10
     volumes:
       - mysql-data
     ports:

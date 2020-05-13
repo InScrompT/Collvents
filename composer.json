@@ -10,12 +10,15 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
+        "darryldecode/cart": "^4.1",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/scout": "^7.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "razorpay/razorpay": "^2.5"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.3",
         "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.4",
