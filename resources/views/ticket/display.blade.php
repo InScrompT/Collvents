@@ -83,6 +83,8 @@
 
 @section('scripts')
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+
     <script>
         let totalSelected = 0;
         let totalBillable = 0;
@@ -94,6 +96,25 @@
                 inputTags[i].value = 0;
             })(i);
         })();
+
+        document.getElementById('rzp-button').onclick = createOrder;
+
+        function createOrder(e) {
+            e.preventDefault();
+            let theOrderButton = document.getElementById('rzp-button');
+
+            if (totalSelected === 0) {
+                swal('Oops', 'No tickets added', 'error');
+            }
+
+            theOrderButton.classList.add('is-loading');
+            axios.default.post('{{ route('ticket.order', $event->id) }}', ticketsChecked).then(res => {
+                console.log(res.data);
+            }).catch(err => {
+                console.error(err);
+            });
+            theOrderButton.classList.remove('is-loading');
+        }
 
         function addTicket(id) {
             let particularTicket = _.find(ticketsChecked, function (obj) {
@@ -203,9 +224,9 @@
             }
         };
         let rzp1 = new Razorpay(options);
-        document.getElementById('rzp-button').onclick = function(e) {
-            rzp1.open();
-            e.preventDefault();
-        }
+        // document.getElementById('rzp-button').onclick = function(e) {
+        //     rzp1.open();
+        //     e.preventDefault();
+        // }
     </script>
 @endsection

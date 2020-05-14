@@ -7,9 +7,12 @@ use App\Ticket;
 
 class TicketController extends Controller
 {
+    private $totalCost = 0;
+    private $totalSelected = 0;
+
     public function __construct()
     {
-        $this->middleware('auth')->except('buy');
+        $this->middleware('auth')->except('buy', 'createOrder');
     }
 
     /**
@@ -77,5 +80,27 @@ class TicketController extends Controller
     public function processBuy(Event $event)
     {
 
+    }
+
+    public function createOrder(Event $event)
+    {
+        collect(request()->all())->map(function ($selectedTicket) {
+            $ticket = Ticket::find($selectedTicket['id']);
+            $this->totalCost += $ticket->price * $selectedTicket['quantity'];
+            $this->totalSelected += $selectedTicket['quantity'];
+        });
+
+        $razorPay = resolve('razorpay');
+        $order = $razorPay->order->create([
+            'amount' => $this->totalCost * 100,
+            'currency' => 'INR',
+            'payment_capture' => 1
+        ]);
+
+        return [
+            'order' => $order['id'],
+            'totalCost' => $this->totalCost,
+            'totalSelected' => $this->totalSelected
+        ];
     }
 }
