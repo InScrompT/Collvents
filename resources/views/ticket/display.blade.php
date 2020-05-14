@@ -41,15 +41,15 @@
                                         <div class="column is-3 level-item">
                                             <div class="columns is-mobile">
                                                 <div class="column is-4">
-                                                    <button class="button is-primary is-outlined is-fullwidth minus" id="{{ $ticket->id }}">-</button>
+                                                    <button class="button is-primary is-outlined is-fullwidth minus price-{{ $ticket->price }}" id="{{ $ticket->id }}">-</button>
                                                 </div>
                                                 <div class="column is-4">
                                                     <div class="field">
-                                                        <input type="text" class="input has-text-centered" value="0" readonly>
+                                                        <input type="text" class="input has-text-centered" value="0" id="selected-{{ $ticket->id }}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="column is-4">
-                                                    <button class="button is-primary is-outlined is-fullwidth plus" id="{{ $ticket->id }}">+</button>
+                                                    <button class="button is-primary is-outlined is-fullwidth plus price-{{ $ticket->price }}" id="{{ $ticket->id }}">+</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -84,7 +84,17 @@
 @section('scripts')
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
+        let totalSelected = 0;
+        let totalBillable = 0;
         let ticketsChecked = [];
+
+        (function resetValues() {
+            let inputTags = document.getElementsByClassName('input');
+            for (let i = 0; i < inputTags.length; i++) (function (i) {
+                inputTags[i].value = 0;
+            })(i);
+        })();
+
         function addTicket(id) {
             let particularTicket = _.find(ticketsChecked, function (obj) {
                 return obj.id === id
@@ -98,7 +108,7 @@
             }
 
             let ticketIdArray = _.findIndex(ticketsChecked, function (obj) {
-                return obj.id === obj.id;
+                return obj.id === id;
             });
             ticketsChecked[ticketIdArray].quantity += 1;
         }
@@ -123,12 +133,41 @@
             }
         }
 
+        function cartChanged(theButton, increment) {
+            let thePrice = _.last(theButton.classList).split('-');
+
+            if (increment) {
+                totalBillable += parseInt(thePrice[1]);
+            } else {
+                if (totalBillable > 0) {
+                    totalBillable -= parseInt(thePrice[1]);
+                }
+            }
+
+            updateTotal();
+            updateSelected();
+        }
+
+        function updateSelected() {
+            totalSelected = 0; // Reset it every-time
+            _.each(ticketsChecked, function (obj) {
+                totalSelected += obj.quantity;
+                document.getElementById('selected-' + obj.id).value = obj.quantity;
+            });
+
+            document.getElementById('selected').innerHTML = totalSelected;
+        }
+
+        function updateTotal() {
+            document.getElementById('total').innerHTML = totalBillable;
+        }
+
         let pluses = document.getElementsByClassName('plus');
         for (let i = 0; i < pluses.length; i++) (function (i) {
             let thePlus = pluses[i];
             thePlus.onclick = function (e) {
-                console.log('clicked plus', thePlus.id);
-                addTicket(thePlus.id);
+                addTicket(parseInt(thePlus.id));
+                cartChanged(thePlus, true);
                 e.preventDefault();
             }
         })(i);
@@ -137,8 +176,8 @@
         for (let i = 0; i < minuses.length; i++) (function (i) {
             let theMinus = minuses[i];
             theMinus.onclick = function (e) {
-                console.log('clicked minus', theMinus.id);
-                removeTicket(theMinus.id);
+                removeTicket(parseInt(theMinus.id));
+                cartChanged(theMinus, false);
                 e.preventDefault();
             }
         })(i);
