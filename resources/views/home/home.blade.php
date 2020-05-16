@@ -7,7 +7,7 @@
                 <div class="columns is-centered">
                     <div class="column is-8">
                         <h1 class="title">
-                            Welcome to {{ env('APP_NAME') }}, {{ Auth::user()->name ?? Auth::user()->email  }}!
+                            Welcome to {{ env('APP_NAME') }}, {{ Auth::user()->profile->name ?? Auth::user()->email  }}!
                         </h1>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
             <div class="has-margin-2">
 
                 @if (session('success'))
-                    <div class="notification is-primary">
+                    <div class="notification is-success">
                         <p class="subtitle">{{ session('success') }}</p>
                     </div>
                 @endif

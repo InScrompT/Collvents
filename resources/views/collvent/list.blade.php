@@ -17,7 +17,7 @@
     <section class="section">
         <div class="container">
             @if (session('success'))
-                <div class="notification is-primary">
+                <div class="notification is-success">
                     <p class="subtitle">{{ session('success') }}</p>
                 </div>
             @endif

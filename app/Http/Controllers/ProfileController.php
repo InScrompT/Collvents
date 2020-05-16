@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Profile;
-use App\User;
 
 class ProfileController extends Controller
 {
@@ -22,7 +21,7 @@ class ProfileController extends Controller
     public function edit()
     {
         return view('profile.edit', [
-            'profile' => Profile::whereUserId(auth()->id())->first()
+            'profile' => Profile::whereUserId(auth()->id())->firstOrFail()
         ]);
     }
 
@@ -34,21 +33,11 @@ class ProfileController extends Controller
             'birthday' => 'required|date',
         ]);
 
-        $profile = Profile::whereUserId(auth()->id())->first();
-
-        if (is_null($profile)) {
-            Profile::create(array_merge([
-                'user_id' => auth()->id()
-            ], request()->all()));
-
-            return redirect()->route('home')->with('success', 'Your profile is updated successfully');
-        }
-
-        $profile->name = request('name');
-        $profile->phone = request('phone');
-        $profile->birthday = request('birthday');
-
-        $profile->saveOrFail();
+        Profile::updateOrCreate(['user_id' => auth()->id()], [
+            'name' => request('name'),
+            'phone' => request('phone'),
+            'birthday' => request('birthday')
+        ]);
 
         return redirect()->route('home')->with('success', 'Your profile is updated successfully');
     }

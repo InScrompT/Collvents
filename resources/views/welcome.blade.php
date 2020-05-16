@@ -22,12 +22,12 @@
     </section>
     <section class="section">
         <div class="container">
-            <div class="has-margin-2">
-                <span class="is-size-4 has-text-grey-light">Featured Events...</span>
-            </div>
+            @if(isset($events))
+                <div class="has-margin-2">
+                    <span class="is-size-4 has-text-grey-light">Featured Events...</span>
+                </div>
 
-            <div class="columns">
-                @if(isset($events))
+                <div class="columns">
                     @foreach($events as $event)
                         <div class="column is-3">
                             <div class="card">
@@ -54,11 +54,11 @@
                             </div>
                         </div>
                     @endforeach
-                @endif
-            </div>
-            <div class="is-pulled-right">
-                <a href="#" class="is-info">...load more events</a>
-            </div>
+                </div>
+                <div class="is-pulled-right">
+                    <a href="#" class="is-info">...load more events</a>
+                </div>
+            @endif
         </div>
     </section>
 @endsection

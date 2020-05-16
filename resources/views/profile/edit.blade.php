@@ -21,7 +21,7 @@
                 <div class="notification is-success">
                     <div class="columns is-vcentered">
                         <div class="column is-12">
-                            <span class="title is-4 has-text-grey-light">{{ session('success') }}</span>
+                            <span class="title is-4">{{ session('success') }}</span>
                         </div>
                     </div>
                 </div>

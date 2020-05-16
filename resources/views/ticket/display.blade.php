@@ -86,6 +86,18 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 
     <script>
+
+        swal({
+            text: 'Enter your E-Mail Address',
+            content: 'input',
+            button: {
+                text: 'Proceed',
+                closeModal: false
+            },
+        }).then(email => {
+            console.log(email);
+        });
+
         let totalSelected = 0;
         let totalBillable = 0;
         let ticketsChecked = [];
