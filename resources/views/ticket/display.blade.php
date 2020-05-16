@@ -86,18 +86,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 
     <script>
-
-        swal({
-            text: 'Enter your E-Mail Address',
-            content: 'input',
-            button: {
-                text: 'Proceed',
-                closeModal: false
-            },
-        }).then(email => {
-            console.log(email);
-        });
-
         let totalSelected = 0;
         let totalBillable = 0;
         let ticketsChecked = [];
@@ -120,11 +108,26 @@
             }
 
             theOrderButton.classList.add('is-loading');
-            axios.default.post('{{ route('ticket.order', $event->id) }}', ticketsChecked).then(res => {
-                console.log(res.data);
+
+            swal({
+                text: 'Enter your E-Mail Address',
+                content: 'input',
+                button: {
+                    text: 'Proceed',
+                    closeModal: false
+                },
+                closeOnClickOutside: false,
+                closeOnEsc: false
+            }).then(email => {
+                if (! isEmail(email)) throw new Error('Please enter a proper email');
+                return axios.default.post('{{ route('ticket.order', $event->id) }}', {ticketsChecked, email});
+            }).then(axiosRes => {
+
             }).catch(err => {
-                console.error(err);
+                console.error(err.message);
+                swal('Oops', 'Something happened. Try Again', 'error');
             });
+
             theOrderButton.classList.remove('is-loading');
         }
 

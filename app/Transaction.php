@@ -27,6 +27,22 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property string|null $deleted_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Transaction whereDeletedAt($value)
+ * @property int $event_id
+ * @property int $total_price
+ * @property int $service_charge
+ * @property int $gst_charge
+ * @property int $gateway_charge
+ * @property string $razorpay_order_id
+ * @property string $razorpay_payment_id
+ * @property string $razorpay_signature
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Transaction whereEventId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Transaction whereGatewayCharge($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Transaction whereGstCharge($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Transaction whereRazorpayOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Transaction whereRazorpayPaymentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Transaction whereRazorpaySignature($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Transaction whereServiceCharge($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Transaction whereTotalPrice($value)
  */
 class Transaction extends Model
 {
