@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "bulma": "^0.8.0",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "tinymce": "^5.2.2",
         "validator": "^13.0.0"
     }
